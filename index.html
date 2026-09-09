@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="shortcut icon" href="assets\image\diente.ico" type="image/x-icon">
+  <link rel="manifest" href="manifest.json">
+  <title>🦷 Sonrisa Saludable - Aprende sobre tus dientes</title>
+  
+  <!-- Fuentes amigables para niños -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/games.css" />
+</head>
+<body>
+  <!-- Personaje guía: Dentín -->
+  <div id="dentin-guide" class="dentin-guide" aria-hidden="false">
+    <div class="dentin-avatar" role="img" aria-label="Dentín, tu amigo diente">🦷</div>
+    <div class="dentin-speech" id="dentin-message">
+      ¡Hola! Soy Dientín 👋<br>¿Listo para aprender sobre tu sonrisa?
+    </div>
+  </div>
+
+  <!-- Controles de accesibilidad -->
+  <div class="accessibility-controls">
+    <button id="toggle-sound" class="icon-btn" aria-label="Activar/desactivar sonidos">
+      🔊 <span class="sr-only">Sonidos</span>
+    </button>
+    <button id="toggle-contrast" class="icon-btn" aria-label="Alto contraste">
+      ◐ <span class="sr-only">Contraste</span>
+    </button>
+  </div>
+
+  <!-- PANTALLA DE INICIO -->
+  <main id="home-screen" class="screen active">
+    <header class="hero">
+      <h1>✨ Sonrisa Saludable ✨</h1>
+      <h2>✨ Proyecto- grupo de JULIO VELANDIA  ✨</h2>
+      <p class="subtitle">Aprende jugando sobre tus dientes<i class="fa-solid fa-tooth"></i> y cómo cuidarlos</p>
+      <div class="progress-summary" id="progress-summary">
+        <span>⭐ Estrellas: <strong id="total-stars">0</strong>/40</span>
+        <span>🎮 Juegos completados: <strong id="completed-games">0</strong>/4</span>
+      </div>
+    </header>
+
+    <!-- Menú de juegos -->
+<!-- Menú de juegos con IDs únicos y data-game -->
+<nav class="games-menu" role="navigation" aria-label="Menú de juegos">
+  <button 
+    type="button"
+    id="btn-quiz"
+    class="game-card" 
+    data-game="quiz" 
+    aria-label="Juego de preguntas: Elige la respuesta correcta"
+    onclick="navigateToGame('quiz')"
+  >
+    <div class="game-icon">❓</div>
+    <h3>Elige la Respuesta</h3>
+    <p>Responde preguntas sobre tus dientes<i class="fa-solid fa-tooth"></i></p>
+    <span class="stars-earned" id="quiz-stars">⭐ 0/10</span>
+  </button>
+
+  <button 
+    type="button"
+    id="btn-memory"
+    class="game-card" 
+    data-game="memory" 
+    aria-label="Juego de memoria: Encuentra parejas dentales"
+    onclick="navigateToGame('memory')"
+  >
+    <div class="game-icon">🧠</div>
+    <h3>Memoria Dental</h3>
+    <p>Encuentra las parejas de dientes</p>
+    <span class="stars-earned" id="memory-stars">⭐ 0/10</span>
+  </button>
+
+  <button 
+    type="button"
+    id="btn-drag-teeth"
+    class="game-card" 
+    data-game="drag-teeth" 
+    aria-label="Juego de arrastrar: Arma tu boca sonriente"
+    onclick="navigateToGame('drag-teeth')"
+  >
+    <div class="game-icon">🦷</div>
+    <h3>Arma tu Sonrisa</h3>
+    <p>Coloca cada diente en su lugar</p>
+    <span class="stars-earned" id="drag-stars">⭐ 0/10</span>
+  </button>
+
+  <button 
+    type="button"
+    id="btn-food-sort"
+    class="game-card" 
+    data-game="food-sort" 
+    aria-label="Juego de clasificación: Alimentos amigos y enemigos"
+    onclick="navigateToGame('food-sort')"
+  >
+    <div class="game-icon">🍎</div>
+    <h3>Alimentos Amigos</h3>
+    <p>Clasifica lo que cuida tus dientes</p>
+    <span class="stars-earned" id="sort-stars">⭐ 0/10</span>
+  </button>
+</nav>
+
+    <!-- Sección educativa -->
+    <section class="learn-section">
+      <h2>📚 Aprende sobre tus dientes<i class="fa-solid fa-tooth"></i></h2>
+      <div class="teeth-info">
+        <details>
+          <summary>🦷 Incisivos - Los cortadores</summary>
+          <p>Son los 8 dientes frontales. ¡Los usamos para morder manzanas y sándwiches!</p>
+        </details>
+        <details>
+          <summary>🦷 Caninos - Los desgarradores</summary>
+          <p>Tienen forma de colmillo suave. Nos ayudan a comer alimentos más duros.</p>
+        </details>
+        <details>
+          <summary>🦷 Premolares - Los trituradores</summary>
+          <p>Aparecen alrededor de los 10 años. Trituran la comida para digerirla mejor.</p>
+        </details>
+        <details>
+          <summary>🦷 Molares - Los moledores</summary>
+          <p>Son los más fuertes y grandes. ¡Muelen la comida como una licuadora!</p>
+        </details>
+      </div>
+      
+      <div class="hygiene-tips">
+        <h3>💡 Consejos de Dentín</h3>
+        <ul>
+          <li><img src="assets/image/cepillo.png" alt="" width="25" height="25">Cepíllate 3 veces al día por 2 minutos</li>
+          <li>🧵 Usa hilo dental una vez al día</li>
+          <li>👨‍⚕️ Visita al dentista cada 6 meses</li>
+          <li>🚫 Evita muchos dulces y refrescos</li>
+          <li>🔄 Cambia tu cepillo cada 3 meses</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Botón para padres/educadores -->
+    <footer class="home-footer">
+      <button id="parents-mode" class="secondary-btn">👨‍👩‍👧‍👦 Información para Padres</button>
+      <p class="motivational">¡Tu sonrisa es única, cuídala con amor! 💙</p>
+    </footer>
+  </main>
+
+  <!-- PANTALLAS DE JUEGOS (se muestran/ocultan con JS) -->
+  
+  <!-- 🎮 Juego 1: Quiz -->
+  <section id="quiz-screen" class="screen game-screen" hidden>
+    <header class="game-header">
+      <button class="back-btn" data-back="home">← Volver</button>
+      <h2>❓ Elige la Respuesta Correcta</h2>
+      <div class="game-progress">
+        <span id="quiz-progress">Pregunta 1/10</span>
+        <span id="quiz-score">⭐ 0</span>
+      </div>
+    </header>
+
+    <div class="quiz-container">
+      <div class="question-card">
+        <p id="question-text" class="question">Cargando pregunta...</p>
+        <div id="options-container" class="options-grid" role="radiogroup"></div>
+      </div>
+      
+      <div id="feedback" class="feedback" hidden>
+        <p id="feedback-message"></p>
+        <button id="next-question" class="primary-btn">Siguiente →</button>
+      </div>
+    </div>
+
+    <div class="game-footer">
+      <button id="quiz-hint" class="hint-btn">💡 Pista</button>
+      <button id="quiz-restart" class="secondary-btn">🔄 Reiniciar</button>
+    </div>
+  </section>
+
+  <!-- 🎮 Juego 2: Memoria -->
+  <section id="memory-screen" class="screen game-screen" hidden>
+    <header class="game-header">
+      <button class="back-btn" data-back="home">← Volver</button>
+      <h2>🧠 Memoria Dental</h2>
+      <div class="game-progress">
+        <span id="memory-stats">Parejas: 0/8</span>
+        <span id="memory-timer">⏱️ 00:00</span>
+      </div>
+    </header>
+
+    <div class="memory-board" id="memory-board" role="grid" aria-label="Tablero de memoria"></div>
+
+    <div id="memory-fact" class="educational-fact" hidden>
+      <p>🦷 <strong id="fact-text"></strong></p>
+    </div>
+
+    <div class="game-footer">
+      <button id="memory-restart" class="secondary-btn">🔄 Reiniciar</button>
+    </div>
+  </section>
+
+  <!-- 🎮 Juego 3: Arrastrar dientes -->
+  <section id="drag-teeth-screen" class="screen game-screen" hidden>
+    <header class="game-header">
+      <button class="back-btn" data-back="home">← Volver</button>
+      <h2>🦷 Arma tu Sonrisa</h2>
+      <span id="drag-progress">Dientes colocados: 0/8</span>
+    </header>
+
+    <div class="drag-game-container">
+      <!-- Boca/encías donde colocar dientes -->
+      <div class="mouth-canvas" id="mouth-canvas" aria-label="Boca para colocar dientes">
+        <div class="gums upper-gum" data-position="upper">
+          <div class="slot" data-type="incisor" data-index="0"></div>
+          <div class="slot" data-type="incisor" data-index="1"></div>
+          <div class="slot" data-type="canine" data-index="0"></div>
+          <div class="slot" data-type="canine" data-index="1"></div>
+        </div>
+        <div class="gums lower-gum" data-position="lower">
+          <div class="slot" data-type="incisor" data-index="0"></div>
+          <div class="slot" data-type="incisor" data-index="1"></div>
+          <div class="slot" data-type="canine" data-index="0"></div>
+          <div class="slot" data-type="canine" data-index="1"></div>
+        </div>
+      </div>
+
+      <!-- Piezas arrastrables -->
+      <div class="teeth-palette" id="teeth-palette" aria-label="Dientes para arrastrar">
+        <div class="draggable-tooth" draggable="true" data-type="incisor" data-id="inc-1">
+          <span class="tooth-icon">🦷</span>
+          <small>Incisivo</small>
+        </div>
+        <div class="draggable-tooth" draggable="true" data-type="incisor" data-id="inc-2">
+          <span class="tooth-icon">🦷</span>
+          <small>Incisivo</small>
+        </div>
+        <div class="draggable-tooth" draggable="true" data-type="canine" data-id="can-1">
+          <span class="tooth-icon">🦷</span>
+          <small>Canino</small>
+        </div>
+        <div class="draggable-tooth" draggable="true" data-type="canine" data-id="can-2">
+          <span class="tooth-icon">🦷</span>
+          <small>Canino</small>
+        </div>
+        <!-- Se pueden agregar premolares y molares para niveles avanzados -->
+      </div>
+    </div>
+
+    <div id="drag-feedback" class="feedback" hidden>
+      <p id="drag-message"></p>
+    </div>
+
+    <div class="game-footer">
+      <button id="drag-hint" class="hint-btn">💡 Mostrar pistas</button>
+      <button id="drag-restart" class="secondary-btn">🔄 Reiniciar</button>
+      <button id="drag-complete" class="primary-btn" hidden>✅ ¡Completado!</button>
+    </div>
+  </section>
+
+  <!-- 🎮 Juego 4: Clasificar alimentos -->
+  <section id="food-sort-screen" class="screen game-screen" hidden>
+    <header class="game-header">
+      <button class="back-btn" data-back="home">← Volver</button>
+      <h2>🍎 Alimentos Amigos</h2>
+      <span id="sort-progress">Clasificados: 0/10</span>
+    </header>
+
+    <div class="sort-game-container">
+      <!-- Zona: Amigos de los dientes -->
+      <div class="sort-zone good-zone" data-type="good" aria-label="Alimentos buenos para los dientes">
+        <h3>🟢 Amigos de tus dientes</h3>
+        <p>Arrastra aquí lo que cuida tu sonrisa</p>
+        <div class="drop-area" id="drop-good"></div>
+      </div>
+
+      <!-- Zona: Enemigos de los dientes -->
+      <div class="sort-zone bad-zone" data-type="bad" aria-label="Alimentos malos para los dientes">
+        <h3>🔴 Enemigos de tus dientes</h3>
+        <p>Arrastra aquí lo que daña el esmalte</p>
+        <div class="drop-area" id="drop-bad"></div>
+      </div>
+    </div>
+
+    <!-- Elementos para clasificar -->
+    <div class="items-palette" id="items-palette" aria-label="Alimentos para clasificar">
+      <div class="draggable-item" draggable="true" data-type="good" data-name="manzana" data-fact="¡La manzana limpia los dientes naturalmente!">
+        <span class="item-icon">🍎</span>
+        <small>Manzana</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="bad" data-name="caramelo" data-fact="El azúcar del caramelo alimenta las bacterias que causan caries.">
+        <span class="item-icon">🍬</span>
+        <small>Caramelo</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="good" data-name="agua" data-fact="El agua ayuda a lavar los restos de comida y mantiene la boca húmeda.">
+        <span class="item-icon">💧</span>
+        <small>Agua</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="bad" data-name="refresco" data-fact="Los refrescos tienen ácido y azúcar que desgastan el esmalte dental.">
+        <span class="item-icon">🥤</span>
+        <small>Refresco</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="good" data-name="queso" data-fact="El queso tiene calcio que fortalece los dientes.">
+        <span class="item-icon">🧀</span>
+        <small>Queso</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="good" data-name="cepillo" data-fact="¡Cepillarte es la mejor forma de mantener tu sonrisa brillante!">
+        <span class="item-icon"><img src="assets/image/cepillo.png" alt="" width="25" height="25"></span>
+        <small>Cepillo</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="bad" data-name="galleta" data-fact="Las galletas se pegan a los dientes. ¡Cepíllate después de comerlas!">
+        <span class="item-icon">🍪</span>
+        <small>Galleta</small>
+      </div>
+      <div class="draggable-item" draggable="true" data-type="good" data-name="zanahoria" data-fact="Las zanahorias crujientes masajean las encías y limpian los dientes.">
+        <span class="item-icon">🥕</span>
+        <small>Zanahoria</small>
+      </div>
+    </div>
+
+    <div id="sort-feedback" class="feedback" hidden>
+      <p id="sort-message"></p>
+    </div>
+
+    <div class="game-footer">
+      <button id="sort-check" class="primary-btn">✅ Verificar clasificación</button>
+      <button id="sort-restart" class="secondary-btn">🔄 Reiniciar</button>
+    </div>
+  </section>
+
+  <!-- 🎉 Pantalla de celebración/certificado -->
+  <section id="certificate-screen" class="screen" hidden>
+    <div class="certificate">
+      <h2>🎉 ¡Felicidades! 🎉</h2>
+      <div class="certificate-badge">⭐ Experto en Sonrisas ⭐</div>
+      <p id="certificate-name">Nombre del jugador</p>
+      <p>Ha completado todos los juegos de <strong>Sonrisa Saludable</strong></p>
+      <p class="certificate-date">Fecha: <span id="cert-date"></span></p>
+      <div class="tooth-celebration">🦷✨🦷✨🦷</div>
+      <p class="motivational">¡Tu sonrisa es única, cuídala con amor! 💙</p>
+      <div class="certificate-actions">
+        <button id="print-cert" class="primary-btn">🖨️ Imprimir Certificado</button>
+        <button id="play-again" class="secondary-btn">🎮 Jugar de nuevo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal para padres/educadores -->
+  <dialog id="parents-modal" class="modal">
+    <div class="modal-content">
+      <h3>👨‍👩‍👧‍👦 Información para Padres y Educadores</h3>
+      <div class="modal-body">
+        <h4>🎯 Objetivos Pedagógicos</h4>
+        <ul>
+          <li>Reconocer los 4 tipos de dientes y sus funciones</li>
+          <li>Comprender hábitos de higiene bucal adecuados</li>
+          <li>Identificar alimentos que benefician o perjudican la salud dental</li>
+          <li>Desarrollar responsabilidad sobre el autocuidado desde temprana edad</li>
+        </ul>
+        <h4>📊 Progreso del Niño</h4>
+        <p>Los avances se guardan automáticamente en este dispositivo. Para reiniciar el progreso, borra los datos de navegación.</p>
+        <h4>🔊 Configuración</h4>
+        <p>Use los botones de la esquina superior para activar/desactivar sonidos o mejorar el contraste visual.</p>
+      </div>
+      <button class="modal-close" aria-label="Cerrar">✓ Entendido</button>
+    </div>
+  </dialog>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/quiz-game.js"></script>
+  <script src="js/memory-game.js"></script>
+  <script src="js/drag-teeth-game.js"></script>
+  <script src="js/food-sort-game.js"></script>
+
+  <!-- Script de diagnóstico (puedes removerlo después) -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    console.log('🔍 Diagnóstico de navegación:');
+    console.log('- navigateToGame:', typeof window.navigateToGame);
+    console.log('- navigateToHome:', typeof window.navigateToHome);
+    console.log('- Botones menú:', document.querySelectorAll('[data-game]').length);
+    console.log('- Pantallas:', document.querySelectorAll('.screen').length);
+    
+    // Verificar que las pantallas existen
+    const screens = ['home-screen', 'quiz-screen', 'memory-screen', 'drag-teeth-screen', 'food-sort-screen'];
+    screens.forEach(id => {
+      const el = document.getElementById(id);
+      console.log(`- ${id}:`, el ? '✅ Existe' : '❌ No existe');
+    });
+  });
+</script>
+</body>
+
+
+</html>
